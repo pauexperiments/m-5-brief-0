@@ -1,0 +1,19 @@
+name: m-5-brief-0
+services:
+  backend:
+    container_name: m-5-brief-0-backend
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM  python:3.11-slim
+        WORKDIR /backend
+        COPY backend/requirements.txt .
+        RUN pip install --no-cache-dir -r requirements.txt
+        CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "9000", "--reload"]
+    volumes:
+      - "./backend:/backend"
+      - "./logs:/logs"
+    environment:
+      - M_5_BRIEF_0_BACKEND_LOG_PATH=/logs/backend.log
+    ports:
+      - "9000:9000"
