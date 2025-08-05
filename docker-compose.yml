@@ -17,3 +17,22 @@ services:
       - M_5_BRIEF_0_BACKEND_LOG_PATH=/logs/backend.log
     ports:
       - "9000:9000"
+  frontend:
+    container_name: m-5-brief-0-frontend
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM  python:3.11-slim
+        WORKDIR /frontend
+        COPY frontend/requirements.txt .
+        RUN pip install --no-cache-dir -r requirements.txt
+        CMD ["streamlit", "run", "app.py", "--server.port", "8000"]
+    volumes:
+      - "./frontend:/frontend"
+      - "./logs:/logs"
+    environment:
+      - M_5_BRIEF_0_FRONTEND_LOG_PATH=/logs/frontend.log
+      - M_5_BRIEF_0_FRONTEND_API_URL=http://backend:9000
+    ports:
+      - "8000:8000"
+
