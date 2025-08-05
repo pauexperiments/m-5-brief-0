@@ -2,7 +2,7 @@ name: Backend Tests
 
 on:
   push
-  
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -35,10 +35,10 @@ jobs:
         cd backend
         pytest tests/ -v --tb=short
         
-    - name: Upload test results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: test-results
-        path: backend/.pytest_cache/
-        retention-days: 7
+    # - name: Upload test results
+    #   uses: actions/upload-artifact@v3
+    #   if: always()
+    #   with:
+    #     name: test-results
+    #     path: backend/.pytest_cache/
+    #     retention-days: 7
