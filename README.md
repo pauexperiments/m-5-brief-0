@@ -8,7 +8,6 @@ docker compose up
 
 ![](README_usage.gif)
 
-
 ## Developpment
 
 ### Tests
@@ -21,5 +20,6 @@ pytest /backend/tests/
 
 ### CICD
 
+The github cicd runs the tests:
 
-The github cicd runs the tests
+![](README_cicd_tests.png)
